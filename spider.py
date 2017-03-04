@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import re
+proxies={"http":"http://127.0.0.1:1080","https":"http://127.0.0.1:1080",};
 headers = {
 		#'content-type': 'application/json',
            	'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36',
@@ -17,12 +18,12 @@ def is_chinese(uchar):
 	else:return False;
 
 urlname='http://chuansong.me/account/';
-public_names=['thefair2','mimeng7','AspirinMuseum'];
+public_names=['AspirinMuseum'];
 for public_name in public_names:
 	count=0;
 	articles_all=[];
 	while True:
-		r=requests.get(url=urlname+public_name,params={'start':0},headers=headers);
+		r=requests.get(url=urlname+public_name,params={'start':0},headers=headers,proxies=proxies);
 		r.encoding='utf-8';
 		if r.ok==True:break;
 
@@ -36,7 +37,7 @@ for public_name in public_names:
 		#time.sleep(1);
 		j=i*12;
 		while True:
-			r=requests.get(url=urlname+public_name,params={'start':j},headers=headers);
+			r=requests.get(url=urlname+public_name,params={'start':j},headers=headers,proxies=proxies);
 			r.encoding='utf-8';
 			if r.ok==True:break;
 
@@ -47,7 +48,7 @@ for public_name in public_names:
 			#article_names.append(article.string.encode('utf-8'));
 			if article['href']=="/n/1458302751513":continue;
 			while True:
-                        	r=requests.get(url="http://chuansong.me"+article['href'],headers=headers);#get every article
+                        	r=requests.get(url="http://chuansong.me"+article['href'],headers=headers,proxies=proxies);#get every article
                         	r.encoding='utf-8';
                         	if r.ok==True:break;
 			soup=BeautifulSoup(r.text,'lxml');
@@ -66,7 +67,7 @@ for public_name in public_names:
 		if i>=len(articles_all):break;
 		print "the ",i+1,"th article";
 		while True:
-                	r=requests.get(url=articles_all[i][1],headers=headers);
+                	r=requests.get(url=articles_all[i][1],headers=headers,proxies=proxies);
                         r.encoding='utf-8';
                         if r.ok==True:break;
              	soup=BeautifulSoup(r.text,'lxml');
