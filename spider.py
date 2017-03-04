@@ -10,7 +10,7 @@ headers = {
 		
 }
 def tag_text_is_dianzan(tag):
-	return (tag.name=='span') and (tag.string==u'点赞');
+	return ((tag.name=='span') and (tag.string==u'点赞'));
 
 urlname='http://chuansong.me/account/';
 public_names=['thefair2','mimeng7','AspirinMuseum'];
@@ -41,6 +41,7 @@ for public_name in public_names:
 
 		for article in articles:
 			#article_names.append(article.string.encode('utf-8'));
+			if article['href']=="/n/1458302751513":continue;
 			while True:
                         	r=requests.get(url="http://chuansong.me"+article['href'],headers=headers);#get every article
                         	r.encoding='utf-8';
@@ -51,7 +52,7 @@ for public_name in public_names:
 				zan_cnt="-1";
 			else:
 				zan_cnt=zan_cnt[0].next_sibling.next_sibling.contents[0].string;
-				articles_all.append((article.string.encode('utf-8'),int(zan_cnt)));
+			articles_all.append((article.string.encode('utf-8'),int(zan_cnt)));
 			count+=1;
 			print count,zan_cnt;
 
