@@ -13,8 +13,9 @@ def tag_text_is_dianzan(tag):
 	return (tag.name=='span') and (tag.string==u'点赞');
 
 urlname='http://chuansong.me/account/';
-public_names=['thefair2']#,'mimeng7','AspirinMuseum'];
+public_names=['thefair2','mimeng7','AspirinMuseum'];
 for public_name in public_names:
+	count=0;
 	articles_all=[];
 	while True:
 		r=requests.get(url=urlname+public_name,params={'start':0},headers=headers);
@@ -28,7 +29,7 @@ for public_name in public_names:
 	
 	print page_cnt;
 	for i in range(0,page_cnt):#visit each page
-		time.sleep(1);
+		#time.sleep(1);
 		j=i*12;
 		while True:
 			r=requests.get(url=urlname+public_name,params={'start':j},headers=headers);
@@ -46,9 +47,13 @@ for public_name in public_names:
                         	if r.ok==True:break;
 			soup=BeautifulSoup(r.text,'lxml');
 			zan_cnt=soup.find_all(tag_text_is_dianzan);
-			zan_cnt=zan_cnt[0].next_sibling.next_sibling.contents[0].string;
-			articles_all.append((article.string.encode('utf-8'),int(zan_cnt)));
-			print zan_cnt;	
+			if len(zan_cnt)==0:
+				zan_cnt="-1";
+			else:
+				zan_cnt=zan_cnt[0].next_sibling.next_sibling.contents[0].string;
+				articles_all.append((article.string.encode('utf-8'),int(zan_cnt)));
+			count+=1;
+			print count,zan_cnt;
 
 	articles_all.sort(key=lambda article:article[1],reverse=True);
 	tmp=[];
