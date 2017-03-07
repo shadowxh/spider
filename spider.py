@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import re
-proxies={"http":"http://127.0.0.1:1080","https":"http://127.0.0.1:1080",};
+proxies={"http":"222.78.248.10:3128","https":"222.78.248.10:3128",};
 headers = {
 		#'content-type': 'application/json',
            	'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36',
