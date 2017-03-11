@@ -7,17 +7,26 @@ rootdir="./article_content";
 for parent,dirs,files in os.walk(rootdir):
 	for file_name in files:
 		print file_name;
-		_file=open(os.path.join(parent,file_name),"r",encoding="utf-8");
+		_file=open(os.path.join(parent,file_name),"r");
 		articles="";
 		for line in _file:
 			if len(line)<=100:continue;
 			articles+=line.rstrip().lstrip();
+		_file.close();
 		#print articles;
-		words=jieba.cut(articles);
+		words=" ".join(jieba.cut(articles));
 		"""
 		for j in words:
 			print j;
 		"""
-		_file.close();
-		break;
-		
+		wc=WordCloud(
+                        font_path="/usr/share/fonts/chinese/MSYHBD.TTC",
+                        background_color="white",
+                        max_words=2000,
+                        #mask=back_color,
+                        max_font_size=100,
+                        random_state=42,
+                );
+                wc.generate(words);
+                wc.to_file(os.path.join(parent,file_name+".png"));
+                break;
