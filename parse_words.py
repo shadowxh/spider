@@ -14,6 +14,7 @@ for parent,dirs,files in os.walk(rootdir):
 			articles+=line.rstrip().lstrip();
 		_file.close();
 		#print articles;
+		jieba.load_userdict("/usr/lib/python2.7/site-packages/jieba/dict.txt.small");
 		words=" ".join(jieba.cut(articles));
 		"""
 		for j in words:
