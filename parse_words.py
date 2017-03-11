@@ -5,8 +5,6 @@ import jieba
 from wordcloud import WordCloud,STOPWORDS,ImageColorGenerator
 rootdir="./article_content";
 stoplist = {}.fromkeys([ line.strip() for line in open("stopwords.txt") ]);
-for key in stoplist:
-	print key;
 for parent,dirs,files in os.walk(rootdir):
 	for file_name in files:
 		print file_name;
