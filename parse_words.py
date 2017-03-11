@@ -5,6 +5,7 @@ import jieba
 from wordcloud import WordCloud,STOPWORDS,ImageColorGenerator
 rootdir="./article_content";
 stoplist = {}.fromkeys([ line.strip() for line in open("stopwords.txt") ]);
+print stoplist;
 for parent,dirs,files in os.walk(rootdir):
 	for file_name in files:
 		print file_name;
@@ -17,7 +18,8 @@ for parent,dirs,files in os.walk(rootdir):
 		#print articles;
 		jieba.load_userdict("/usr/lib/python2.7/site-packages/jieba/dict.txt.small");
 		words=jieba.cut(articles);
-		words= [word for word in list(words) if word not in stoplist];
+		words=[word.encode('utf-8') for word in list(words)];
+		words= [word for word in words if word not in stoplist];
 		words=" ".join(words);
 		"""
 		for j in words:
