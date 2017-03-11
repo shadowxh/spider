@@ -28,5 +28,4 @@ for parent,dirs,files in os.walk(rootdir):
                         random_state=42,
                 );
                 wc.generate(words);
-                wc.to_file(os.path.join(parent,file_name+".png"));
-                break;
+                wc.to_file(os.path.join(parent,file_name[:-5]+".png"));
