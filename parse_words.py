@@ -18,12 +18,8 @@ for parent,dirs,files in os.walk(rootdir):
 		jieba.load_userdict("/usr/lib/python2.7/site-packages/jieba/dict.txt.small");
 		words=jieba.cut(articles);
 		#words=[word.encode('utf-8') for word in list(words)];
-		words= [word for word in list(words) if word not in stoplist];
+		words= [word for word in words if word.encode('utf8') not in stoplist];
 		words=" ".join(words);
-		"""
-		for j in words:
-			print j;
-		"""
 		wc=WordCloud(
                         font_path="/usr/share/fonts/chinese/MSYHBD.TTC",
                         background_color="white",
