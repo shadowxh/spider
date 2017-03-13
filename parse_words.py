@@ -21,8 +21,14 @@ for parent,dirs,files in os.walk(rootdir):
 		#words=[word.encode('utf-8') for word in list(words)];
 		words= [word for word in words if word.encode('utf8') not in stoplist];
 		
+		word_freq={};
 		for tmp in words:
-			print tmp;
+			word_freq[tmp]=word_freq.get(tmp,0)+1;
+		items = word_freq.items()
+		items.sort(key=lambda x: x[1],reverse=True);
+		for ele in items:
+			print ele[0].encode('utf-8'),ele[1];
+
 		words=" ".join(words);
 		wc=WordCloud(
                         font_path="/usr/share/fonts/chinese/MSYHBD.TTC",
