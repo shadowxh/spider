@@ -20,6 +20,9 @@ for parent,dirs,files in os.walk(rootdir):
 		words=jieba.cut(articles);
 		#words=[word.encode('utf-8') for word in list(words)];
 		words= [word for word in words if word.encode('utf8') not in stoplist];
+		
+		for tmp in words:
+			print tmp;
 		words=" ".join(words);
 		wc=WordCloud(
                         font_path="/usr/share/fonts/chinese/MSYHBD.TTC",
