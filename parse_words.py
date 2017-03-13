@@ -8,7 +8,7 @@ stoplist = {}.fromkeys([ line.strip() for line in open("stopwords.txt") ]);
 for parent,dirs,files in os.walk(rootdir):
 	for file_name in files:
 		print file_name;
-		if file_name[-8:]!="_new.txt":continue;
+		if file_name[-9:]!="_new2.txt":continue;
 		_file=open(os.path.join(parent,file_name),"r");
 		articles="";
 		for line in _file:
